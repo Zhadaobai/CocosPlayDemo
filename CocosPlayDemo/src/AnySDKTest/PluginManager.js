@@ -46,7 +46,7 @@ var PluginManager = cc.Class.extend({
                 // 获取社交插件，社交插件，在腾讯模式下，主要用于获取好友列表
                 self.socialPlugin = self.anySDKAgent.getSocialPlugin();
 
-                // 获取分享插件，分享插件，主要用于唤起腾讯分享的界面进行分享操作
+                // 获取分享插件，分享插件，主要用于唤起分享的界面进行分享操作
                 self.sharePlugin = self.anySDKAgent.getSharePlugin();
 
                 if (self.userPlugin) {

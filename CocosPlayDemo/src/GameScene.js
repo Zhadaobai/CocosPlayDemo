@@ -51,7 +51,9 @@ var GameLayer = cc.Layer.extend({
         if (info) {
             var data = JSON.parse(info);
             CocosPlay.log("init user info, data = " + data);
-        }
+        }else{
+            CocosPlay.log("user info is null");
+        };
     },
     
     initFunctionList: function () {
@@ -100,6 +102,9 @@ var GameLayer = cc.Layer.extend({
         });
         menu.alignItemsVerticallyWithPadding(8);
         this.buttonLayer.addChild(menu);
+
+        this.showUserIcon();
+
     },
 
     /**
@@ -112,11 +117,11 @@ var GameLayer = cc.Layer.extend({
             var productId = new Date().getTime();
             var ext = this.getOrderId + "_" + userId;
             var info = {
-                Product_Price   : "1",
+                Product_Price   : "233",
                 Product_Id      : productId + "",
                 Product_Name    : "EnCaL Gold",
                 Server_Id       : "13",
-                Product_Count   : "1",
+                Product_Count   : "12450",
                 Role_Id         : userId + "",
                 Role_Name       : "EnCaL",
                 Role_Grade      : "10",
@@ -291,5 +296,41 @@ var GameLayer = cc.Layer.extend({
     back: function () {
         CocosPlay.log("GameScene back");
         cc.director.runScene(new LoginScene());
+    },
+
+    //显示用户头像（如果有）
+    showUserIcon: function(){
+
+        cc.log("准备显示用户头像");
+
+        pluginManager.getUserInfo(function(ret, msg){
+            cc.log("ret == " + ret);
+            cc.log("msg == " + msg);
+
+            var infoJson = JSON.parse(msg);
+            var avatarUrl = infoJson["avatarUrl"];
+            cc.log("user avatarUrl = " + avatarUrl);
+
+            if(avatarUrl){
+                cc.loader.loadImg(avatarUrl, {width: 100, height: 100}, function(error, img){
+                    if (!error) {
+                        cc.log("加载用户头像成功");
+
+                        var spr = cc.Sprite.createWithTexture(img);
+                        spr.setPosition(cc.p(spr.getContentSize().width / 2, cc.winSize.height - spr.getContentSize().height / 2));
+                        cc.director.getRunningScene().addChild(spr);
+
+                    } else {
+                        cc.log("加载用户头像失败，请确认头像链接是否异常");
+                    }
+                });
+
+                cc.log("用户头像显示完毕");
+            }else{
+                cc.log("用户头像链接为空，或该渠道暂不支持显示用户头像");
+            }
+
+        });
+
     }
 });
