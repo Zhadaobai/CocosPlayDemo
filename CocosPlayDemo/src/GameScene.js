@@ -117,11 +117,11 @@ var GameLayer = cc.Layer.extend({
             var productId = new Date().getTime();
             var ext = this.getOrderId + "_" + userId;
             var info = {
-                Product_Price   : "233",
+                Product_Price   : "1",
                 Product_Id      : productId + "",
                 Product_Name    : "EnCaL Gold",
                 Server_Id       : "13",
-                Product_Count   : "12450",
+                Product_Count   : "1",
                 Role_Id         : userId + "",
                 Role_Name       : "EnCaL",
                 Role_Grade      : "10",

@@ -229,70 +229,70 @@ var LoginLayer = cc.Layer.extend({
         var winSize = cc.winSize;
         var gameEntryLabel = new cc.LabelTTF("进入游戏", "Arial", 38);
         var gameEntryItem = new cc.MenuItemLabel(gameEntryLabel, function() {
-            //cc.director.runScene(new GameScene());
+            cc.director.runScene(new GameScene());
 
-            /*预加载
+            /**预加载 - 因为demo所用资源较少，因此暂时注释掉
             * 定制preload界面样式
             * 最简单的定制方法就是替换res_engine中的资源，保持文件名与图片大小不变
             * 如果要自行定制，请参考以下 cc.LoaderLayer.setConfig 的写法
             * 以下为cc.LoaderLayer.setConfig的完整写法，如果不需要改变某个对象的属性值，可以置为null或不写，Cocos Play会自动为其设置一个默认值
-            */
-            cc.LoaderLayer.setConfig({
-                background: {//背景图片
-                    res: "res_engine/preload_bg.jpg"//使用自定义背景图时，CP请使用与游戏设计分辨率大小一致的图片
-                },
-                title: {//标题
-                    show: true,//是否显示标题
-                    res: "res_engine/preload_title.png",//标题的资源
-                    position: null,//标题在整个layer中的位置 e.g.  cc.p(100,100);
-                    action: null//标题执行的action e.g.  cc.moveTo(1, cc.p(200,200))
-                },
-                logo: {
-                    res: "res_engine/preload_logo.png",
-                    show: true,
-                    position: null,
-                    action: null
-                },
-                progressBar: {//进度条
-                    show: true,
-                    res: "res_engine/progress_bar.png",//progressBar 图片
-                    offset: null,//loadingbar偏移loadingbar背景的offset  e.g.  cc.p(50,50)
-                    position: null,
-                    barBackgroundRes: "res_engine/progress_bg.png",//progressBar 背景图片
-                    barPoint: "res_engine/progress_light.png",//途中闪光点的图片
-                },
-                tips: {
-                    color: null,//提示文字颜色 e.g. cc.color(0, 255, 0),默认为白色
-                    show: true,
-                    fontSize: 22,//提示语的文字大小
-                    position: null,
-                    tipsProgress: function (status, loaderlayer) {//进度条更新的回调
-                        var statusStr = "runtime正在";
-                        if (status.stage == cc.network.preloadstatus.DOWNLOAD) {
-                            statusStr += "下载";
-                        } else if (status.stage == cc.network.preloadstatus.UNZIP) {
-                            statusStr += "解压";
-                        }
-                        if (status.groupName) {
-                            statusStr += status.groupName;
-                        }
-                        statusStr += " 进度:" + status.percent.toFixed(2) + "%";
-                        loaderlayer.getTipsLabel().setString(statusStr);//设置提示语文字
-                    }
-                },
-                onEnter: function (layer) {
-                    cc.log("LoaderLayer onEnter");//onEnter生命周期的时候调用
-                },
-                onExit: function (layer) {
-                    cc.log("LoaderLayer onExit");//onExit生命周期的时候调用
-                }
-            });
-            //preload resources
-            cc.LoaderLayer.setUseDefaultSource(false);//false-不使用默认资源
-            cc.LoaderLayer.preload(["Other"], function () {
-                cc.log("preload resource finished!");
-                cc.director.runScene(new GameScene());
-            });
+            **/
+            //cc.LoaderLayer.setConfig({
+            //    background: {//背景图片
+            //        res: "res_engine/preload_bg.jpg"//使用自定义背景图时，CP请使用与游戏设计分辨率大小一致的图片
+            //    },
+            //    title: {//标题
+            //        show: true,//是否显示标题
+            //        res: "res_engine/preload_title.png",//标题的资源
+            //        position: null,//标题在整个layer中的位置 e.g.  cc.p(100,100);
+            //        action: null//标题执行的action e.g.  cc.moveTo(1, cc.p(200,200))
+            //    },
+            //    logo: {
+            //        res: "res_engine/preload_logo.png",
+            //        show: true,
+            //        position: null,
+            //        action: null
+            //    },
+            //    progressBar: {//进度条
+            //        show: true,
+            //        res: "res_engine/progress_bar.png",//progressBar 图片
+            //        offset: null,//loadingbar偏移loadingbar背景的offset  e.g.  cc.p(50,50)
+            //        position: null,
+            //        barBackgroundRes: "res_engine/progress_bg.png",//progressBar 背景图片
+            //        barPoint: "res_engine/progress_light.png",//途中闪光点的图片
+            //    },
+            //    tips: {
+            //        color: null,//提示文字颜色 e.g. cc.color(0, 255, 0),默认为白色
+            //        show: true,
+            //        fontSize: 22,//提示语的文字大小
+            //        position: null,
+            //        tipsProgress: function (status, loaderlayer) {//进度条更新的回调
+            //            var statusStr = "runtime正在";
+            //            if (status.stage == cc.network.preloadstatus.DOWNLOAD) {
+            //                statusStr += "下载";
+            //            } else if (status.stage == cc.network.preloadstatus.UNZIP) {
+            //                statusStr += "解压";
+            //            }
+            //            if (status.groupName) {
+            //                statusStr += status.groupName;
+            //            }
+            //            statusStr += " 进度:" + status.percent.toFixed(2) + "%";
+            //            loaderlayer.getTipsLabel().setString(statusStr);//设置提示语文字
+            //        }
+            //    },
+            //    onEnter: function (layer) {
+            //        cc.log("LoaderLayer onEnter");//onEnter生命周期的时候调用
+            //    },
+            //    onExit: function (layer) {
+            //        cc.log("LoaderLayer onExit");//onExit生命周期的时候调用
+            //    }
+            //});
+            ////preload resources
+            //cc.LoaderLayer.setUseDefaultSource(false);//false-不使用默认资源
+            //cc.LoaderLayer.preload(["groupName"], function () {
+            //    cc.log("preload resource finished!");
+            //    cc.director.runScene(new GameScene());
+            //});
 
         }, this);
 
